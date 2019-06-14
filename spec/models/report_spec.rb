@@ -8,7 +8,7 @@ RSpec.describe Report, type: :model do
       @factory = RGeo::Geographic.spherical_factory
       @report = Report.new(
         scooter: @scooter,
-        location: @factory.point(-21, 22),
+        location: @factory.point(-97.7375201, 39.0907132),
         battery_level: 37.3
       )
     end
