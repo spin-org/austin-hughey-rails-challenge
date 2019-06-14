@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_080246) do
+ActiveRecord::Schema.define(version: 2019_06_14_083429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -400,6 +400,17 @@ ActiveRecord::Schema.define(version: 2019_06_14_080246) do
     t.index ["state"], name: "place_lookup_state_idx"
   end
 
+  create_table "reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "scooter_id"
+    t.float "battery_level"
+    t.geometry "location", limit: {:srid=>0, :type=>"st_point"}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battery_level"], name: "index_reports_on_battery_level"
+    t.index ["location"], name: "index_reports_on_location", using: :gist
+    t.index ["scooter_id"], name: "index_reports_on_scooter_id"
+  end
+
   create_table "scooters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active", default: true
     t.datetime "created_at", null: false
@@ -542,4 +553,5 @@ ActiveRecord::Schema.define(version: 2019_06_14_080246) do
     t.string "place", limit: 100, null: false
   end
 
+  add_foreign_key "reports", "scooters"
 end
