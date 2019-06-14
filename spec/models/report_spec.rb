@@ -23,7 +23,7 @@ RSpec.describe Report, type: :model do
       expect(@report.valid?).to eq false
     end
 
-    it "requires a location" do
+    it "requires a latitude" do
       @report.location = nil
       expect(@report.valid?).to eq false
     end
