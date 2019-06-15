@@ -1,6 +1,7 @@
 class Scooter < ApplicationRecord
   validates :active, inclusion: { in: [true, false] }
   has_many :reports
+  has_many :tickets
 
   #
   # Call this to "shut off" a scooter. It'll be considered "locked" and out
