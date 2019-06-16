@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ReportsController, type: :controller do
+  describe "reports API" do
+    before :each do
+      @scooter = Scooter.create()
+      3.times do
+        Report.create(scooter: @scooter)
+        # For this test we need no other attributes
+      end
+    end
+
+    it "renders all the reports for a given scooter" do
+      get :by_scooter, params: { scooter_id: @scooter.id }
+      expect(response).to be_successful
+      expect(JSON.parse(response.body).count).to eq 3
+    end
+  end
+
   describe "creating reports" do
     before :each do
       @scooter = Scooter.new

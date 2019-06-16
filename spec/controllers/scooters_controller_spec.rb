@@ -38,7 +38,7 @@ RSpec.describe ScootersController, type: :controller do
 # I ran into a non-deterministic test failure here but could only reproduce it
 # once, and that was before calling pry on it. So I'm leaving this here for now
 # in hopes of catching the error. I suspect something having to do with time
-# and/or psql.
+# and/or psql. Never would I do this for real or on code going through CI.
 if count != 3
   binding.pry
 end
