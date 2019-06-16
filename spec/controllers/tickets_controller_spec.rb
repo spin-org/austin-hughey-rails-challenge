@@ -14,7 +14,7 @@ RSpec.describe TicketsController, type: :controller do
 
     it "creates a ticket" do
       post :create, params: { ticket: @ticket_attributes }
-      expect(response).to be_success
+      expect(response).to be_successful
 
       #
       # Since we said deactivate_scooter is true above, now that scooter should
@@ -27,7 +27,7 @@ RSpec.describe TicketsController, type: :controller do
     it "can look up a ticket" do
       @ticket = Ticket.new(@ticket_attributes) ; @ticket.save
       get :show, params: { id: @ticket.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
