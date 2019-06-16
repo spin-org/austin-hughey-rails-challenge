@@ -2,6 +2,26 @@
 
 A code challenge for www.spin.app.
 
+## Setup and testing interface
+
+In a nutshell, after cloning this repo and having PostgreSQL setup properly
+(see below)...
+
+```
+$ alias be=bundle exec
+$ be rake db:create
+$ be rake db:migrate
+$ be rake spec
+```
+
+The specs pass:
+
+![passing specs screenshot](public/spec.png)
+
+And the coverage is pretty good, too:
+
+![screenshot of simplecov test coverage](public/coverage.png)
+
 ## Let's talk PostgreSQL
 
 This project uses PostgreSQL and will need the PostGIS extension. However, it's
