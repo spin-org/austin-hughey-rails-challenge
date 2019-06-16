@@ -17,15 +17,5 @@ RSpec.describe Report, type: :model do
       @report.scooter = nil
       expect(@report.valid?).to eq false
     end
-
-    it "requires a battery level" do
-      @report.battery_level = nil
-      expect(@report.valid?).to eq false
-    end
-
-    it "requires a latitude" do
-      @report.location = nil
-      expect(@report.valid?).to eq false
-    end
   end
 end

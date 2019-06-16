@@ -95,12 +95,18 @@ class Scooter < ApplicationRecord
 
   #
   # Call this to "shut off" a scooter. It'll be considered "locked" and out
-  # of service. Can be used for maintenance or any othe reason to disable
+  # of service. Can be used for maintenance or any other reason to disable
   # a scooter.
   #
   def deactivate!
     if active?
       update_attribute :active, false
+
+      #
+      # Now add a report record for cities to see historical data that this
+      # scooter was deactivated at this day and time.
+      #
+      Report.create(scooter: self, deactivated_at: DateTime.now.utc)
     end
   end
 
@@ -110,6 +116,12 @@ class Scooter < ApplicationRecord
   def activate!
     if !active?
       update_attribute :active, true
+
+      #
+      # Now add a report record for cities to see historical data that this
+      # scooter was activated at this day and time.
+      #
+      Report.create(scooter: self, activated_at: DateTime.now.utc)
     end
   end
 end

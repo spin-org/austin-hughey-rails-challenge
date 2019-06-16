@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_002443) do
+ActiveRecord::Schema.define(version: 2019_06_16_071817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -29,7 +29,11 @@ ActiveRecord::Schema.define(version: 2019_06_15_002443) do
     t.geometry "location", limit: {:srid=>0, :type=>"st_point"}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "activated_at"
+    t.datetime "deactivated_at"
+    t.index ["activated_at"], name: "index_reports_on_activated_at"
     t.index ["battery_level"], name: "index_reports_on_battery_level"
+    t.index ["deactivated_at"], name: "index_reports_on_deactivated_at"
     t.index ["location"], name: "index_reports_on_location", using: :gist
     t.index ["scooter_id"], name: "index_reports_on_scooter_id"
   end
