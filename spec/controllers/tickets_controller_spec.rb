@@ -15,14 +15,19 @@ RSpec.describe TicketsController, type: :controller do
     it "creates a ticket" do
       post :create, params: { ticket: @ticket_attributes }
       expect(response).to be_success
-      expect(JSON.parse(response.body)['scooter_id']).to eq @ticket_attributes[:scooter_id]
+
+      #
+      # Since we said deactivate_scooter is true above, now that scooter should
+      # be inactive and therefore not in our Scooter.active scope.
+      #
+
+      expect(Scooter.active.include?(@scooter)).to eq false
     end
 
     it "can look up a ticket" do
       @ticket = Ticket.new(@ticket_attributes) ; @ticket.save
       get :show, params: { id: @ticket.id }
       expect(response).to be_success
-      expect(JSON.parse(response.body)['scooter_id']).to eq @ticket.scooter.id
     end
   end
 
