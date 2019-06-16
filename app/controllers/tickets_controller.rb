@@ -4,7 +4,16 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
     if @ticket.valid? && @ticket.save
-      render json: @ticket.reload
+
+      #
+      # Here we need to check: did that ticket say to deactivate a scooter?
+      # If so, deactivate it before rendering.
+      #
+
+      if @ticket.deactivate_scooter?
+        @ticket.scooter.deactivate!
+      end
+      render json: @ticket
     else
       render plain: "Bad Request", status: :bad_request
     end
