@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://example.com/reports.schema.json",
+  "type": "object",
+  "properties": {
+    "reports": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "scooter_id": {
+          "type": "string"
+        },
+        "battery_level": {
+          "type": "number"
+        },
+        "location": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "activated_at": {
+          "type": "string"
+        },
+        "deactivated_at": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

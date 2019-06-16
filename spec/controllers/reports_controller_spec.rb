@@ -15,6 +15,13 @@ RSpec.describe ReportsController, type: :controller do
       expect(response).to be_successful
       expect(JSON.parse(response.body).count).to eq 3
     end
+
+#     it "validates with the JSON Schema Validator" do
+#       schema = JSON.parse(File.read(File.expand_path(__FILE__ + "../../../../public/reports.schema.json")))
+#       get :by_scooter, params: { scooter_id: @scooter.id }
+# # binding.pry
+#       expect(JSON::Validator.validate(schema, JSON.parse(response.body))).to be_true
+#     end
   end
 
   describe "creating reports" do
