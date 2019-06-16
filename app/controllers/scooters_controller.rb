@@ -32,10 +32,6 @@ private
     @scooter = Scooter.find(params[:id])
   end
 
-  def scooter_params
-    params.require(:scooter).permit(:id)
-  end
-
   def multiple_scooter_params
     params.permit(ids: [])
   end
