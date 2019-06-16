@@ -63,6 +63,7 @@ end
       end
     end
   end
+
   describe '/scooters' do
     before :each do
       Scooter.new.save
@@ -88,8 +89,13 @@ end
       scooters = JSON.parse(response.body)
       scooters.each do |s|
         expect(s['active']).to eq true
+        #
+        # We also expect that each scooter now has an activation report
+        #
+        expect(Report.where(scooter_id: s['id']).count).to eq 1
+        report = Report.where(scooter_id: s['id']).first
+        expect(report.activated_at).to_not be_blank
       end
-
     end
 
     it "renders the scooter json" do
@@ -103,6 +109,9 @@ end
       expect(response.status).to eq 200
       scooter = JSON.parse(response.body)
       expect(scooter['active']).to eq false
+      expect(Report.where(
+        "deactivated_at IS NOT NULL AND scooter_id = ?", scooter['id']
+      ).count).to eq 1
     end
 
     it 'PUT :id/activate' do
@@ -111,6 +120,9 @@ end
       expect(response.status).to eq 200
       scooter = JSON.parse(response.body)
       expect(scooter['active']).to eq true
+      expect(Report.where(
+        "activated_at IS NOT NULL AND scooter_id = ?", scooter['id']
+      ).count).to eq 1
     end
   end
 end
