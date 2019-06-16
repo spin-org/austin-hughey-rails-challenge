@@ -3,35 +3,46 @@
   "$id": "http://example.com/reports.schema.json",
   "type": "object",
   "properties": {
-    "reports": "array",
-    "items": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "scooter_id": {
-          "type": "string"
-        },
-        "battery_level": {
-          "type": "number"
-        },
-        "location": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "string"
-        },
-        "updated_at": {
-          "type": "string"
-        },
-        "activated_at": {
-          "type": "string"
-        },
-        "deactivated_at": {
-          "type": "string"
-        }
-      }
+    "reports": {
+       "type":"array",
+       "items": {
+         "type":"object",
+         "required": ["id", "scooter_id"],
+         "properties": {
+           "id": {
+             "type":"string",
+             "title":"The report's individual UUID"
+           },
+           "scooter_id": {
+              "type":"string",
+              "title":"The individual scooter's UUID to which this report pertains"
+           },
+           "battery_level": {
+              "type":["number", "null"],
+              "title":"Percentage of battery charge remaining (as reported by scooter)"
+           },
+           "location": {
+              "type":["string", "null"],
+              "title":"In the format of POINT(LON, LAT), lat/lon GPS coordinate"
+           },
+           "created_at": {
+              "type":["string", "null"],
+              "title":"This is when the record itself was created, so think of it as when this event occurred"
+           },
+           "updated_at": {
+              "type":["string", "null"],
+              "title":"Automatically added by programming tools; can be safely ignored, should always equal created_at"
+           },
+           "activated_at": {
+              "type":["string", "null"],
+              "title":"When this device was activated; may be activated multiple times, so look for latest activation in result set"
+           },
+           "deactivated_at": {
+              "type":["string", "null"],
+              "title":"A deactivation event happened at the given date and time (UTC); probably for maintenance"
+           }
+         }
+       }
     }
   }
 }

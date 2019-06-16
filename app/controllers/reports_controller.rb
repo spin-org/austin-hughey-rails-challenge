@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 
   def by_scooter
     @scooter = Scooter.find(params[:scooter_id])
-    render json: @scooter.reports # TODO: Paginate this
+    render json: { reports: @scooter.reports } # TODO: Paginate this
   end
 
   def create
