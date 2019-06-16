@@ -4,6 +4,13 @@ class Scooter < ApplicationRecord
   has_many :tickets
 
   #
+  # Returns only active scooters (that aren't deactivated)
+  #
+  def self.active
+    Scooter.where(active: true)
+  end
+
+  #
   # Call this to "shut off" a scooter. It'll be considered "locked" and out
   # of service. Can be used for maintenance or any othe reason to disable
   # a scooter.
